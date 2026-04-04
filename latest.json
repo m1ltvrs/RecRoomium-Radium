@@ -1,5 +1,9 @@
 {
-  name: "Radium Latest",
-  version: "20260220",
-  download_cdn: "",
+  "name": "Radium Latest",
+  "version": "20260220",
+  "download_cdn": "https://recroomium.cdn.chillboiostudios.com/recroomium/Radium_PC_20260220_KbdgFG.zip",
+  "screen_patch_version": "1.0.0",
+  "screen_patch_url": "https://raw.githubusercontent.com/Fttristan/RecRoomium-Radium/refs/heads/main/linux/Radium_Screen",
+  "vr_patch_version": "1.0.0",
+  "vr_patch_url": "https://raw.githubusercontent.com/Fttristan/RecRoomium-Radium/refs/heads/main/linux/Radium_VR"
 }
