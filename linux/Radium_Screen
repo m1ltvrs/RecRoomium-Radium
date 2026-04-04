@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+
+# --- CONFIG ---
+APPID=471710
+GAME_NAME="RecRoom"
+GAME_EXE="Radium.exe"
+PROTON_DIR="$HOME/.steam/steam/compatibilitytools.d/Proton-GE RTSP Latest"
+STEAM_COMPAT_DATA_PATH="$HOME/.steam/steam/steamapps/compatdata/$APPID"
+STEAM_COMPAT_CLIENT_INSTALL_PATH="$HOME/.steam/steam"
+PROTON="$PROTON_DIR/proton"
+SCRIPT_DIR="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+
+# Always run from the game folder so Doorstop/BepInEx files are discoverable.
+cd "$SCRIPT_DIR"
+
+if [ ! -x "$PROTON" ]; then
+    notify-send "$GAME_NAME" "Proton launcher was not found at: $PROTON"
+    exit 1
+fi
+
+# --- CHECK IF GAME IS ALREADY RUNNING ---
+if pgrep -f "$GAME_EXE" > /dev/null; then
+    notify-send "$GAME_NAME" "Radium is already running! If no window is visible, patching may still be in progress."
+    exit 0
+fi
+
+# --- CHECK IF BEPINEX IS PATCHING ---
+CACHE_FILE="$STEAM_COMPAT_DATA_PATH/pfx/drive_c/users/steamuser/AppData/LocalLow/BepInEx/cache/chainloader_typeloader.dat"
+
+if [ ! -f "$CACHE_FILE" ]; then
+    notify-send "$GAME_NAME" "Radium is patching in the background. A window should appear within a few minutes."
+fi
+
+# --- LAUNCH GAME WITH PROTON ---
+export STEAM_COMPAT_DATA_PATH
+export STEAM_COMPAT_CLIENT_INSTALL_PATH
+export WINEDLLOVERRIDES="winhttp=n,b"
+
+"$PROTON" run "$SCRIPT_DIR/$GAME_EXE" +forcemode:screen
