@@ -20,7 +20,7 @@ fi
 
 # --- CHECK IF GAME IS ALREADY RUNNING ---
 if pgrep -f "$GAME_EXE" > /dev/null; then
-    notify-send "$GAME_NAME" "Radium is already running! If no window is visible, patching may still be in progress."
+    notify-send "$GAME_NAME" "SURGEOS is already running! If no window is visible, patching may still be in progress."
     exit 0
 fi
 
@@ -28,7 +28,7 @@ fi
 CACHE_FILE="$STEAM_COMPAT_DATA_PATH/pfx/drive_c/users/steamuser/AppData/LocalLow/BepInEx/cache/chainloader_typeloader.dat"
 
 if [ ! -f "$CACHE_FILE" ]; then
-    notify-send "$GAME_NAME" "Radium is patching in the background. A window should appear within a few minutes."
+    notify-send "$GAME_NAME" "SURGEOS is patching in the background. A window should appear within a few minutes."
 fi
 
 # --- LAUNCH GAME WITH PROTON ---
